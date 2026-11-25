@@ -1,0 +1,39 @@
+[project]
+name = "maintidoc"
+version = "0.1.0"
+description = "MaintiDoc - Étape 1 : RAG multimodal agentique (LlamaIndex, PGVector, CLIP, Ollama, LangChain, Streamlit)"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    # Parsing / indexation
+    "llama-index-core>=0.12",
+    "llama-index-readers-file>=0.4",
+    "pymupdf>=1.24.3",
+    "pillow>=10.0",
+    # Embeddings open source (BGE-M3 + CLIP)
+    "sentence-transformers>=3.0",
+    # Base vectorielle
+    "psycopg[binary]>=3.2",
+    "pgvector>=0.3",
+    # LLM / VLM locaux
+    "ollama>=0.4",
+    # Orchestration agentique
+    "langchain>=1.0",
+    "langchain-ollama>=1.0",
+    "langgraph>=1.0",
+    # Interface
+    "streamlit>=1.40",
+    "python-dotenv>=1.0",
+]
+
+[dependency-groups]
+dev = ["pytest>=8.0"]
+
+[tool.uv]
+# Application lancée depuis la racine (python cli.py, streamlit run app.py) :
+# pas de paquet à construire/installer.
+package = false
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

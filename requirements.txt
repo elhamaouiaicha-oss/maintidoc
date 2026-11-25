@@ -1,0 +1,27 @@
+# Parsing / indexation
+llama-index-core>=0.12
+llama-index-readers-file>=0.4
+pymupdf>=1.24.3
+pillow>=10.0
+
+# Embeddings open source (BGE-M3 + CLIP)
+sentence-transformers>=3.0
+
+# Base vectorielle
+psycopg[binary]>=3.2
+pgvector>=0.3
+
+# LLM / VLM locaux
+ollama>=0.4
+
+# Orchestration agentique
+langchain>=1.0
+langchain-ollama>=1.0
+langgraph>=1.0
+
+# Interface
+streamlit>=1.40
+
+# Divers
+python-dotenv>=1.0
+pytest>=8.0

@@ -1,0 +1,22 @@
+# PostgreSQL 16 + extension pgvector.
+# Ollama tourne sur la machine hôte (accès GPU plus simple) : voir README.
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: maintidoc-db
+    environment:
+      POSTGRES_USER: maintidoc
+      POSTGRES_PASSWORD: maintidoc
+      POSTGRES_DB: maintidoc
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U maintidoc -d maintidoc"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  pgdata:
