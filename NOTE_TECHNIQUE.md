@@ -93,3 +93,16 @@ d'information dans le document.
 - **Aucune évaluation chiffrée** de la qualité de récupération ou de réponse n'a été
   réalisée ; elle relève de l'Étape 2 (nDCG@5, MRR@10) de la feuille de route.
 - Pas de gestion des droits d'accès ni de versions de documents (prévus ensuite).
+
+
+| 1 | Combien de têtes d'attention et quelles dimensions ? | h = 8, d_k = d_v = 64, d_model = 512 (§3.2.2) | texte | ⚠️ 8 têtes et d_model = 512 corrects, ajoute le modèle big (16 têtes, d_model = 1024) ; d_k = d_v = 64 non mentionnés ([S2], p.X, outil Y) |
+
+| 2 | Quels scores BLEU obtient le Transformer (big) ? | 28,4 en EN→DE et 41,0 en EN→FR (Table 2) | tableaux | ✅ 28.4 et 41.0 corrects, cités [S1] (Table 2, p.8) ; limite visible : exposants aplatis (« 1020 » pour 10^20) |
+
+| 3 | Que représente la Figure 2 (gauche) ? | Attention « scaled dot-product » : MatMul → Scale → Mask (optionnel) → SoftMax → MatMul sur Q, K, V (p. 4) | images | ⚠️ figure correcte retrouvée ([S7], p.4) et nommée « Scaled Dot-Product Attention », mais étapes MatMul/Scale/Mask/SoftMax absentes : la description VLM a surtout décrit la partie droite (Multi-Head) ; une phrase générale non sourcée ajoutée par le modèle |
+
+| 4 | Pourquoi diviser les produits scalaires par √d_k ? | Pour éviter que le softmax tombe dans des zones à gradients très faibles quand d_k est grand (§3.2.1) | texte | ⚠️ formule et idée générale (stabilité du softmax quand d_k grandit) correctes, mais « gradients très faibles » absent, formulation vague ; citation [S1] qui ne contient pas l'explication (p.4) : passage clé non retrouvé |
+
+| 5 | Quel est l'effet d'une seule tête d'attention ? | BLEU 24,9 contre 25,8 pour le modèle de base, soit 0,9 de moins (Table 3 ligne A, §6.2) | tableaux + texte | ⚠️ explication qualitative correcte (§3.2.2), sans valeur BLEU ni citation [S#] ; l'agent n'a appelé que rechercher_texte (jamais rechercher_tableaux) ; avec l'historique non effacé, la réponse recopiait la précédente |
+
+| 6 | Quel est le prix d'un GPU P100 ? | Information absente : le système doit le dire sans inventer | tous | ✅ reconnaît que le prix n'est pas dans le document, aucune valeur inventée (formulation limitée aux « tableaux » alors que le texte aurait aussi pu être cité) |
