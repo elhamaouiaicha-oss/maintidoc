@@ -92,3 +92,20 @@ NOTE_TECHNIQUE.md
 - `db.py` concentre tout l'accès à la base : migrer vers Qdrant se limite à ce module.
 - `agent.py` : les outils sont des fonctions isolées ; l'Étape 3 (LangGraph, MCP)
   ajoutera `get_equipment_history` / `create_ticket` au même titre.
+
+## Démonstration
+
+Interface Streamlit de MaintiDoc : l'utilisateur pose une question sur le PDF
+« Attention Is All You Need », l'agent interroge l'index PGVector et répond
+à partir des passages retrouvés (LLM local `qwen2.5:7b` via Ollama).
+
+![Démonstration de MaintiDoc](docs/demo_streamlit.png)
+
+**Exemples de questions testées**
+
+| Question | Outil utilisé |
+|---|---|
+| Combien de têtes d'attention utilise le Transformer de base ? | recherche texte |
+| Quels sont les scores BLEU du Transformer ? | recherche texte (tableau) |
+| Que montre la Figure 2 ? | recherche image |
+| Quel est le prix d'un GPU P100 ? | aucune source : l'agent le dit |
